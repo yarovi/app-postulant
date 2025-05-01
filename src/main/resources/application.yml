@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: appPostulante
+  data:
+    mongodb:
+      uri: mongodb://gitecsl:giyecsl2025@134.122.125.240:27017/admin
