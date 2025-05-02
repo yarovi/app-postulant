@@ -1,22 +1,30 @@
 package org.gitecsl.net.apppostulante.controller;
 
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.gitecsl.net.apppostulante.entity.Postulant;
 import org.gitecsl.net.apppostulante.service.PostulantService;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/postulants")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class PostulantController {
 
     private  PostulantService postulantService;
 
     @PostMapping
     public Mono<Postulant> createPatient(@RequestBody Postulant patient) {
+        if(patient.getId() != null) {
+            return Mono.error(new IllegalArgumentException("ID should not be provided for new patients"));
+        }
+        UUID myUUI = UUID.randomUUID();
+        patient.setId(myUUI.toString());
         return postulantService.createPostulant(patient);
     }
 

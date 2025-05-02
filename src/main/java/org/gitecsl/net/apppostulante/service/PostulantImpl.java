@@ -3,6 +3,7 @@ package org.gitecsl.net.apppostulante.service;
 import lombok.RequiredArgsConstructor;
 import org.gitecsl.net.apppostulante.entity.Postulant;
 import org.gitecsl.net.apppostulante.repository.PostulantRepository;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -11,10 +12,12 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class PostulantImpl implements PostulantService {
 
+    Logger logger = org.slf4j.LoggerFactory.getLogger(PostulantImpl.class);
     private final PostulantRepository postulantRepository;
 
     @Override
     public Mono<Postulant> createPostulant(Postulant postulant) {
+        logger.info("Creating new postulant: {}", postulant);
         return postulantRepository.save(postulant);
     }
 
