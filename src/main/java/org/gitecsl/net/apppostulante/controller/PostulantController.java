@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("applicant-service/api/postulants")
+@RequestMapping("api/postulants")
 @AllArgsConstructor
 public class PostulantController {
 
