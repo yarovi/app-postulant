@@ -1,6 +1,9 @@
 spring:
   application:
-    name: appPostulante
+    name: apppostulante
   data:
     mongodb:
       uri: mongodb://gitecsl:giyecsl2025@134.122.125.240:27017/admin
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
