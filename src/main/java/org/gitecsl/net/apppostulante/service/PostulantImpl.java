@@ -43,10 +43,11 @@ public class PostulantImpl implements PostulantService {
     }
 
     @Override
-    public Mono<Void> deletePostulant(String id) {
-       return postulantRepository.findById(id)
-                .flatMap(existingPostulant -> postulantRepository.delete(existingPostulant))
-                .switchIfEmpty(Mono.error(new RuntimeException("Postulant not found")));
+    public Mono<Boolean> deletePostulant(String id) {
+        return postulantRepository.findById(id)
+                .flatMap(postulant -> postulantRepository.delete(postulant)
+                        .then(Mono.just(true))
+                        .defaultIfEmpty(false));
     }
 
     @Override
